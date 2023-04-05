@@ -14,10 +14,20 @@ function App() {
   const { fetchAdvice } = useAdvice();
 
   useEffect(() => {
-    fetchAdvice().then((advice) => {
+    const getAdvice = async () => {
+      const advice = await fetchAdvice();
+
       setAdvice(advice);
-    });
+    };
+
+    getAdvice();
   }, []);
+
+  const handleClick = async () => {
+    const advice = await fetchAdvice();
+
+    setAdvice(advice);
+  };
 
   return (
     <div className="flex content-center justify-center items-center h-[100svh]">
@@ -32,7 +42,10 @@ function App() {
           <img src={Devider} />
         </div>
         <div>
-          <button className="transition-[0.2s_ease] flex content-center justify-center p-5 rounded-full bg-neonGreen absolute left-[50%] bottom-0 translate-y-1/2 -translate-x-1/2 hover:shadow-[0_0_30px_-3px_rgba(81,255,168,1)]">
+          <button
+            onClick={handleClick}
+            className="transition-[0.2s_ease] flex content-center justify-center p-5 rounded-full bg-neonGreen absolute left-[50%] bottom-0 translate-y-1/2 -translate-x-1/2 hover:shadow-[0_0_30px_-3px_rgba(81,255,168,1)]"
+          >
             <img src={Dice} />
           </button>
         </div>
